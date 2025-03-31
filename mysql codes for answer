@@ -1,0 +1,108 @@
+#find all Doctors who have treated a patient for " Diabetes"#
+
+SELECT 
+    d.doctor_id,
+    CONCAT(fname, ' ', lname) AS Name,
+    gender,
+    illness,
+    patient_id
+FROM
+    doctor d
+        JOIN
+    worker w ON d.D_Worker_ID = w.Worker_ID
+        JOIN
+    diagnosis di ON d.Doctor_id = di.Doctor_ID
+WHERE
+    Illness = 'Diabetes';  
+
+# List the details of all patient who have been prescribed "B205"#
+SELECT 
+    p.Patient_ID,
+    CONCAT(fname, ' ', lname) AS Name,
+    Address,
+    Gender,
+    Age,
+    Blood_Type,
+    Bill_ID
+FROM
+    patient p
+        JOIN
+    medication_prescribed mp ON p.patient_id = mp.patient_id
+        JOIN
+    medication m ON mp.medication_id = m.medication_id
+WHERE
+    m.Medication_ID = 'B205';
+    
+# Find the total numbers of workers in each dept
+select * from department;
+
+# Retrieve the names and phone numbers of all patient who have been diagnosed with " Diabetes"#
+
+SELECT 
+    CONCAT(fname, ' ', lname) AS Name, p.telephone, illness
+FROM
+    patient p
+        JOIN
+    diagnosis d ON p.Patient_ID = d.Patient_ID
+WHERE
+    Illness = 'Diabetes';  
+
+# List all cafeteria staff along with their job position and the food type served in their assigned cafeteria
+SELECT 
+    cs.Staff_ID,cs.position,c.Food_Type
+FROM
+    cafeteria c
+        JOIN
+    cafeteria_staff cs ON c.Cafeteria_ID = cs.Cafeteria_ID
+        JOIN
+    staff s ON s.staff_id = cs.Staff_ID;
+
+# Show details of patients along with the medication they are prescribed, even if no medication has been prescribed.
+SELECT 
+    *
+FROM
+    patient p
+        JOIN
+    medication_prescribed mp ON p.Patient_ID = mp.Patient_ID;
+
+# find the average age of patients diagnosed with 'Flu'
+SELECT 
+    avg(age) as average_age
+FROM
+    patient p
+        JOIN
+    tests  t on p.Patient_ID=t.patient_id where illness= 'Flu';
+
+# Get names and ID for all Doctors who work in the 'ER' dept.#
+
+SELECT 
+    CONCAT(fname, ' ', lname) AS Name,d.Doctor_ID
+FROM
+    worker w
+        JOIN
+    doctor d ON w.Worker_ID = d.D_Worker_ID
+        JOIN
+    department de ON d.Department_ID = de.Department_ID
+WHERE
+  d.department_ID = 'er';
+
+# Find the total salary expenditure for all workers#
+
+SELECT 
+    SUM(salary) AS total_salary_expenditure
+FROM
+    worker;
+
+# List all cafeteria staff along with their job position and the food type served in their assigned cafeteria
+SELECT 
+    cs.Staff_ID,cs.position,c.Food_Type
+FROM
+    cafeteria c
+        JOIN
+    cafeteria_staff cs ON c.Cafeteria_ID = cs.Cafeteria_ID
+        JOIN
+    staff s ON s.staff_id = cs.Staff_ID;
+
+
+
+  
